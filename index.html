@@ -730,12 +730,29 @@ const ACCOUNTS = {
 //  }
 // ═══════════════════════════════════════════════════
 const PRESETS = {
-  "Groceries": {
-    desc: "Tesco Stores",
+  "Tesco Groceries": {
+    desc: "Midsomer Norton Tesco Stores 2880",
+    note: "",
     exp: ["05 Expenses", "Groceries", "Tesco", ""]
   },
-  "Transport": {
+  "Lidl Groceries": {
+    desc: "Lidl Midsomer Norton",
+    note: "",
+    exp: ["05 Expenses", "Groceries", "Lidl", ""]
+  },
+  "Fuel Murco": {
+    desc: "Murco PFS",
+    note: "#C300",
+    exp: ["05 Expenses", "Transport", "Fuel", ""]
+  }
+  "Fuel Tesco": {
+    desc: "Tesco PFS",
+    note: "#C300",
+    exp: ["05 Expenses", "Transport", "Fuel", ""]
+  }
+  "Fuel - Sains": {
     desc: "Sainsbury PFS",
+    note: "#C300",
     exp: ["05 Expenses", "Transport", "Fuel", ""]
   }
 };
@@ -846,8 +863,9 @@ function applyPreset() {
 
   const p = PRESETS[key];
 
-  // Fill description
+  // Fill description and notes
   document.getElementById('txn-desc').value = p.desc;
+  document.getElementById('txn-notes').value = p.note || "";
 
   // Fill expense cascade
   const [l1, l2, l3, l4] = p.exp;
