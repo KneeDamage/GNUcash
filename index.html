@@ -1066,7 +1066,6 @@ function addTransaction() {
   const desc   = document.getElementById('txn-desc').value.trim();
   const num    = document.getElementById('txn-num').value.trim();
   const notes  = document.getElementById('txn-notes').value.trim();
-  const type   = document.getElementById('txn-type').value;
   const payAcc = resolveAccount('pay-l1','pay-l2','pay-l3',null, true);
 
   if (!date)   { toast('Please enter a date.', 'err'); return; }
