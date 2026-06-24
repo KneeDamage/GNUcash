@@ -799,7 +799,6 @@ function updatePathDisplay(id1, id2, id3, pathId, id4) {
   const v1 = document.getElementById(id1).value;
   const v2 = document.getElementById(id2).value;
   const v3 = document.getElementById(id3).value;
-  // 18:14 23/06/2026const v4 = document.getElementById(id4).value;
   const parts = [v1, v2, v3].filter(Boolean);
   document.getElementById(pathId).textContent = parts.length ? parts.join(' → ') : 'No account selected';
 }
@@ -962,17 +961,13 @@ function resolveAccount(l1id, l2id, l3id, l4id, isPayAccount = false) {
   return [v1, v2, v3, v4].filter(Boolean).join(':');
 }
 
-
-
-
-
-
 function resolveSplitAccount(idx) {
   const v1 = document.getElementById(`sl1-${idx}`).value;
   const v2 = document.getElementById(`sl2-${idx}`).value;
   const v3 = document.getElementById(`sl3-${idx}`).value;
-  const v4 = document.getElementById(`sl4-${idx}`).value;
-  return [v1, v2, v3, v4].filter(Boolean).join(':');
+  const el4 = document.getElementById(`sl4-${idx}`);
+  const v4 = el4 ? el4.value : '';
+return [v1, v2, v3, v4].filter(Boolean).join(':');
 }
 
 // ═══════════════════════════════════════════════════
