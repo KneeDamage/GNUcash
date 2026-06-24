@@ -1072,28 +1072,16 @@ function addTransaction() {
   if (!desc)   { toast('Please enter a description.', 'err'); return; }
   if (!payAcc) { toast('Please select a payment account.', 'err'); return; }
 
-  let splits = [];
+  const expAcc = resolveAccount('exp-l1','exp-l2','exp-l3', 'exp-l4', false);
+  const amt    = parseFloat(document.getElementById('simple-amount').value);
+  
+  if (!expAcc) { toast('Please select an expense account.', 'err'); return; }
+  if (isNaN(amt) || amt <= 0) { toast('Please enter a valid amount.', 'err'); return; }
+  
+  const splits = [{ account: expAcc, amount: amt }];
 
-  if (type === 'split') {
-    const rows = document.querySelectorAll('[id^="split-row-"]');
-    rows.forEach(row => {
-      const idx = row.id.replace('split-row-','');
-      const acc = resolveSplitAccount(idx);
-      const amt = parseFloat(document.getElementById(`sa-${idx}`).value);
-      if (acc && !isNaN(amt) && amt > 0) {
-        splits.push({ account: acc, amount: amt });
-      }
-    });
-    if (splits.length === 0) { toast('Add at least one split line with an amount.','err'); return; }
-  } else {
-    const expAcc = resolveAccount('exp-l1','exp-l2','exp-l3', 'exp-l4', false);
-    const amt    = parseFloat(document.getElementById('simple-amount').value);
-    if (!expAcc) { toast('Please select an expense account.', 'err'); return; }
-    if (isNaN(amt) || amt <= 0) { toast('Please enter a valid amount.', 'err'); return; }
-    splits.push({ account: expAcc, amount: amt });
-  }
-
-  const total = splits.reduce((s,r)=>s+r.amount, 0);
+  const total = amt;
+  
   const txn = { id: Date.now(), date, num, desc, notes, payAccount: payAcc, splits, total };
   pending.push(txn);
   savePending();
